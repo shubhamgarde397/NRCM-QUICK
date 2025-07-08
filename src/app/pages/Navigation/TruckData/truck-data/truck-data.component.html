@@ -1,0 +1,78 @@
+<div class="well">
+    <button class="btn-danger" (click)="changeDiv(1)">
+      <i class="material-icons">add</i>
+    </button>
+    <button class="btn-success" (click)="changeDiv(2)">
+      <i class="material-icons">desktop_windows</i>
+    </button>
+</div>
+
+<div class="well" *ngIf="showdiv">
+  <form [formGroup]="myFormGroup" (ngSubmit)="store(myFormGroup)" submitted=true
+    enctype="multipart/form data" action="/">
+
+
+    <div class="form-group row">
+      <div class="col-sm-6">
+        <input type="text" id="truck" class="form-control" formControlName="truck" placeholder="TN12AS1234">
+      </div>
+    </div>
+
+
+
+    <div class="form-group row">
+      <div class="col-sm-6">
+        <select id="dest" class="form-control" formControlName="type">
+          <option selected>Select Type</option>
+          <option value="Open">Open</option>
+          <option value="Container">Container</option>
+        </select>
+      </div>
+    </div>
+
+
+
+    <div class="row">
+      <div class="form-group" class="col-xs-2"></div>
+      <div class="form-group" class="col-xs-1">
+        <button type="submit" class="btn btn-primary" [disabled]='!myFormGroup.valid'>
+          <i class="material-icons">send</i>
+        </button>
+      </div>
+
+    </div>
+  </form>
+
+
+
+</div>
+
+
+<div class="well" *ngIf="!showdiv">
+    <button class="btn btn-danger" (click)="refresh()"><i class="material-icons">refresh</i></button>
+
+    <div class="well" style="background-color: orange;border-radius: 10vh;" *ngFor="let i of list;let j = index">
+      <h3 style="text-align: center;color:black;">{{i.truckno}}</h3>
+
+      <h4>Name : <input style="width:20vh;" type="text" value={{i.name}}  id="name_{{j}}"></h4>
+      <h4>PAN : <input style="width:20vh;" type="text" maxlength="10" value={{i.pan}} id="pan_{{j}}"></h4>
+      <h4 *ngIf="i.contact==='green'">Contact : <i class="material-icons"  style="color: green;">
+          done
+          </i></h4>
+      <h4 *ngIf="i.contact===''">
+        Contact : <input style="width:20vh;" type="number" max="10" value={{i.contact}} id="contact_{{j}}" (keyup)="onChangeContact(j)">
+        <button class="btn-danger" (click)="changeContact(i,j)"><i class="material-icons">send</i></button>      
+      </h4>
+      
+      <h4>Type : <select style="width:20vh;" id="toc_{{j}}" class="form-control">
+          <option selected disabled>{{i.type}}</option>
+          <option value="Open">Open</option>
+          <option value="Container">Container</option>
+        </select>
+      </h4> 
+
+          <button class="btn-danger" (click)="changeData(i,j)"><i class="material-icons">send</i></button>
+          <button class="btn-danger" (click)="delete(i,j)"><i class="material-icons">delete</i></button>
+    
+    </div>
+</div>
