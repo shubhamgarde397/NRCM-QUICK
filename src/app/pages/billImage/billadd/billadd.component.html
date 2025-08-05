@@ -1,0 +1,53 @@
+ <div class="row">
+        <div class="col-sm-6 col-xs-6">
+          <input style="color:wheat;background-color: black;" type="text" class="form-control" [(ngModel)]='truckVar' placeholder="Bill No.">
+        </div>
+        <div class="col-sm-6 col-xs-6">
+          <select style="color: wheat;background-color:black;" class="form-control" *ngIf="wala11" id="partyType" [(ngModel)]="trucknoid11" (change)="find11UniqueTruck()" id="truckNoone11">
+            <option>Default</option>
+            <option *ngFor="let i of unique11turnbooklist;let j = index;" value={{i.party}}>{{i.party}}</option>
+          </select>
+        </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-4 col-xs-4">
+            <button  class="btn btn-warning"  style="color: black;" (click)="find()">Bill No</button>
+          </div>
+        </div>
+
+
+            <div class="col-sm-12">
+                
+            <table class="table" style="width:100%;background-color: black;color: wheat;" align="center" *ngIf="byTruckName">
+                  <thead align="center" style="font-weight: bold">
+                    <tr class=table-header>
+                      <th>Srno</th>
+                      <th>Loading/TruckNo</th>
+                      <th>LRNO</th>
+                    </tr>
+                  </thead>
+                  <tbody align="center">
+                    <tr *ngFor="let i of turn11;let j = index">
+                      <td>{{j+1}}</td>
+                      <td>{{i.loadingDate|date:'dd-MM-yyyy'}}<br>{{i.truckno}}</td>
+                      <td>{{i.nrlrno}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+
+                <div class="container" style="background-color: black;color: wheat;" *ngIf="byTruckName">
+
+                    <button class="btn btn-danger" (click)="image('c')">
+                      <i style="color:black;" class="material-icons">camera_alt</i>
+                    </button>
+                    <input type="file" id="file1c" style="display:none" (change)="onFileSelected($event)"  capture="camera" accept="image/*">
+
+                    <button class="btn btn-danger" (click)="image('g')">
+                      <i style="color:black;" class="material-icons">photo</i>
+                    </button>
+                    <input type="file" id="file1g" style="display:none" (change)="onFileSelected($event)" accept=".jpg .jpeg .png">
+
+                    <button (click)="uploadFile(5)" class="btn btn-danger  bl bl"><i style="color:black;" class="material-icons">file_upload</i></button>
+                </div>
+          </div>

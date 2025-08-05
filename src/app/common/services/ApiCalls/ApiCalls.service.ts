@@ -42,4 +42,8 @@ export class ApiCallsService {
     }
   }
 
+  s3Image(URL): Observable<any>{
+    return this.http.get(URL).pipe(map((res) => res));
+  }
+
 }

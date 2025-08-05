@@ -5,9 +5,12 @@
     <button class="btn-success" (click)="changeDiv(2)">
       <i class="material-icons">desktop_windows</i>
     </button>
+    <button class="btn-success" (click)="changeDiv(3)">
+      <i class="material-icons">call</i>
+    </button>
 </div>
 
-<div class="well" *ngIf="showdiv">
+<div class="well" *ngIf="showdiv=='1'">
   <form [formGroup]="myFormGroup" (ngSubmit)="store(myFormGroup)" submitted=true
     enctype="multipart/form data" action="/">
 
@@ -48,7 +51,7 @@
 </div>
 
 
-<div class="well" *ngIf="!showdiv">
+<div class="well" *ngIf="showdiv=='2'">
     <button class="btn btn-danger" (click)="refresh()"><i class="material-icons">refresh</i></button>
 
     <div class="well" style="background-color: orange;border-radius: 10vh;" *ngFor="let i of list;let j = index">
@@ -74,5 +77,18 @@
           <button class="btn-danger" (click)="changeData(i,j)"><i class="material-icons">send</i></button>
           <button class="btn-danger" (click)="delete(i,j)"><i class="material-icons">delete</i></button>
     
+    </div>
+</div>
+
+<div class="well" *ngIf="showdiv=='3'">
+    <button class="btn btn-danger" (click)="refresh1()"><i class="material-icons">refresh</i></button>
+
+    <div class="well" style="background-color: orange;border-radius: 10vh;" *ngFor="let i of list;let j = index">
+      <h3 style="text-align: center;color:black;" (click)="call(i)">{{i.truckno}}
+        <i *ngIf="i.contact!=''" class="material-icons">call</i>
+      <input *ngIf="i.contact==''" style="width:20vh;" type="number" max="10" id="contact_{{j}}" (keyup)="onChangeContact(j)">
+        <button *ngIf="i.contact==''" class="btn-danger" (click)="changeContact(i,j)"><i class="material-icons">send</i></button>
+      </h3>
+
     </div>
 </div>

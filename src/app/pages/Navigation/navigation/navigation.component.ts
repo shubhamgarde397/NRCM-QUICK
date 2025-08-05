@@ -95,17 +95,7 @@ export class NavigationComponent implements OnInit {
     // undefined
     // document.getElementsByClassName('navbar-brand')[0].setAttribute("data-target","#myModalDD")
 
-    if(data==''){}
-    else if(data.slice(0,1)==='F'){
-      switch(data.slice(1)){
-          case '9':
-          this.logout();
-          break;
-      }
-    }
-    else{
       this.router.navigate(['Navigation/'+data])
-    }
   }
 
 

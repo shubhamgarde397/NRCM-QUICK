@@ -11,6 +11,23 @@ export class handleFunction {
     public monthNames = [];
     public MorseCryptedFinalCode = "";
     public monthtoReturn;
+
+      fileToBase64(file: File): Promise<string> {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        const base64String = reader.result as string;
+        resolve(base64String);
+      };
+      reader.onerror = (error) => {
+        reject(error);
+      };
+    });
+  }
+
+
+
     genaratemonthNames() {
         return this.monthNames = ["January", "February", "March", "April", "May", "June",
             "July", "August", "September", "October", "November", "December"]

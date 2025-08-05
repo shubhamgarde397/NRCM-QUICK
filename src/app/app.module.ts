@@ -30,6 +30,8 @@ import {
 import { LoginComponent } from './pages/login/login/login.component';
 import { NavigationComponent } from './pages/Navigation/navigation/navigation.component';
 import { TruckDataComponent } from './pages/Navigation/TruckData/truck-data/truck-data.component';
+import { PODPhotoComponent } from './pages/PODPHOTO/podphoto/podphoto.component';
+import { BilladdComponent } from './pages/billImage/billadd/billadd.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +42,9 @@ import { TruckDataComponent } from './pages/Navigation/TruckData/truck-data/truc
     MainPageComponent,
     LoginComponent,
     NavigationComponent,
-    TruckDataComponent
+    TruckDataComponent,
+    PODPhotoComponent,
+    BilladdComponent
     
   ],
   imports: [

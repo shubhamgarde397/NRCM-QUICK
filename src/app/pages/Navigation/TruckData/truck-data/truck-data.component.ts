@@ -15,7 +15,7 @@ export class TruckDataComponent implements OnInit {
 public myFormGroup: FormGroup;
   public submitted = false;
   public list=[];
-  public showdiv=true;
+  public showdiv='0';
   public toc = '';
 
   constructor(public router:Router,public apiCallservice: ApiCallsService, public formBuilder: FormBuilder,
@@ -133,16 +133,22 @@ public myFormGroup: FormGroup;
       });
   }
 
-   changeDiv(data){
-    switch (data) {
-      case 1:
-        this.showdiv=true;
-        break;
-
-    case 2:
-        this.showdiv=false;
-        break;
+    refresh1(){
+      if([1,6,2].indexOf(this.securityCheck.nrcmid)!=-1){
+      let value={}
+    value['method'] = 'truckDisplay';
+    this.apiCallservice.handleData_New_python
+      ('commoninformation', 1, value, true)
+      .subscribe((res: any) => {
+        this.list=res.Data;
+      });
+    }else{
+      alert('Contact Admin!')
     }
+  }
+
+   changeDiv(data){
+        this.showdiv=data;
    }
 
 }

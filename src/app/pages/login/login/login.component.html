@@ -4,12 +4,22 @@
 
 
 <div class="container-fluid home" *ngIf="isLoginSuccess===false">
-  <div class="row">
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="header">
-      <div class="col-sm-4">
-        {{header}}</div>
+
+<nav class="navbar navbar-inverse" style="margin-bottom: 0px;">
+
+  <div class="container-fluid" style="background-color: black;">
+
+    <div class="navbar-header">
+      <a class="navbar-brand" routerLink="NRCM_HOME">NITIN ROADWAYS</a>
+
     </div>
+    
   </div>
+
+</nav>
+
+
+
   <div class="row ">
     <div class="col-xs-12" id="main">
       <form [formGroup]="myFormGroup" (ngSubmit)="login(myFormGroup,!loginButton)" submitted=true
@@ -17,7 +27,7 @@
 
         <div class="form-group">
           <div
-            class="col-sm-6">
+            class="col-sm-6 col-xs-6">
             <input type="text" style="color:black;" class="form-control input" placeholder="Username"
               formControlName="username" required />
           </div>
@@ -29,7 +39,7 @@
         </div>
 
         <div class="form-group">
-          <div class="col-sm-6">
+          <div class="col-sm-6 col-xs-6">
             <input type="password" style="color:black;" class="form-control input" placeholder="Password"
               formControlName="password" required />
           </div>
@@ -41,14 +51,10 @@
         </div>
 
         <div class="form-group">
-          <button type="submit"
-            class="btn btn-primary col-sm-6"
-            data-toggle="modal" data-target="#myModal" *ngIf="loginButton">
+          <button type="submit" class="btn btn-primary col-sm-6 col-xs-6" *ngIf="loginButton">
             <i class="material-icons">lock_open</i>
           </button>
-          <button type="submit"
-            class="btn btn-primary col-sm-6"
-            *ngIf="!loginButton">
+          <button type="submit" class="btn btn-primary col-sm-6 col-xs-6" *ngIf="!loginButton">
             <i class="material-icons">lock_open</i>
           </button>
         </div>

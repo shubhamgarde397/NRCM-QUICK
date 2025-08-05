@@ -1,0 +1,191 @@
+ <div class="row">
+        <div class="col-sm-6 col-xs-6">
+          <input style="color:wheat;background-color: black;" type="text" class="form-control" [(ngModel)]='truckVar' placeholder="Truck No">
+        </div>
+        <div class="col-sm-6 col-xs-6">
+          <select style="color: wheat;background-color:black;" class="form-control" *ngIf="wala11" id="partyType" [(ngModel)]="trucknoid11" (change)="find11UniqueTruck()" id="truckNoone11">
+            <option>Default</option>
+            <option *ngFor="let i of unique11turnbooklist;let j = index;" value={{i}}>{{i}}</option>
+          </select>
+        </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-4 col-xs-4">
+            <button  class="btn btn-warning"  style="color: black;" (click)="find()">Truck No</button>
+          </div>
+        </div>
+
+
+            <div class="col-sm-12">
+                
+            <table class="table" style="width:100%;background-color: black;color: wheat;" align="center" *ngIf="byTruckName">
+                  <thead align="center" style="font-weight: bold">
+                    <tr class=table-header>
+                      <th>Srno</th>
+                      <th>Loading/TruckNo</th>
+                      <th>Party-Place/LRNO</th>
+                      <th *ngIf="amountV">Amounts</th>
+                      <th colspan="5">Images</th>
+                    </tr>
+                  </thead>
+                  <tbody align="center">
+                    <tr *ngFor="let i of turn11;let j = index">
+                      <td>{{j+1}}</td>
+                      <td>{{i.loadingDate|date:'dd-MM-yyyy'}}<br>{{i.truckName}}</td>
+                      <td (click)="setLRNO(i,j,i.nrlrno)">{{i.partyName}}<br>{{i.placeName}}<br>{{i.nrlrno}}</td>
+                      <td *ngIf="amountV">{{i.hamt}}<br>{{i.rent}}<br>{{i.suspenseAmt}}</td>
+                      <td *ngIf="i.nrlrno!=''" data-toggle="modal" data-target="#myModalImage" (click)="savePayment(i,j)">
+                        <button class="btn btn-warning"><i style="color:black;" class="material-icons">remove_red_eye</i></button><br>
+                        <div class="row">
+                          <div class="col-xs-1" [ngClass]="i['podImage'][0]['setter']==0 ? 'redC':'greenC'" id="a1"></div>
+                          <div class="col-xs-1" [ngClass]="i['podImage'][1]['setter']==0 ? 'redC':'greenC'" id="a1"></div>
+                          <div class="col-xs-1" [ngClass]="i['podImage'][2]['setter']==0 ? 'redC':'greenC'" id="a1"></div>
+                          <div class="col-xs-1" [ngClass]="i['podImage'][5]['setter']==0 ? 'redC':'greenC'" id="a1"></div>
+                          </div>
+                      </td>
+
+                    </tr>
+                  </tbody>
+                </table>
+          </div>
+
+
+             <div class="modal fade" id="myModalImage" role="dialog">
+              <div class="modal-dialog">
+              
+            
+                <div class="modal-content" style="background-color: black;color: wheat;">
+                  <div class="modal-header">
+                    <button style="color:black;" type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">POD Images</h4>
+                  </div>
+                  <div class="modal-body">
+
+                    <table class="table table-bordered table-responsive-sm">
+                      <tr>
+                      <th>Name</th>
+                      <th>File</th>
+                      </tr>
+
+                      <tr>
+                        <td>LR Photo</td>
+                        <td>
+
+                          
+                            <button class="btn btn-danger bcg  bcg" (click)="image('c',1)"  [hidden]="bigII['podImage'][0]['setter']==0"><i style="color:black;" class="material-icons">camera_alt</i></button>
+                            <input type="file" id="file1c" style="display:none" (change)="onFileSelected($event)"  capture="camera" accept="image/*" *ngIf="bigII['podImage'][0]['setter']==0">
+                            <button class="btn btn-danger bcg" (click)="image('g',1)"  [hidden]="bigII['podImage'][0]['setter']==0"><i style="color:black;" class="material-icons">photo</i></button>
+                            <input type="file" id="file1g" style="display:none" (change)="onFileSelected($event)" accept=".jpg .jpeg .png" *ngIf="bigII['podImage'][0]['setter']==0">
+
+                          <span *ngIf="bigII['podImage'][0]['setter']==1">Image Uploaded</span>
+                          <button (click)="uploadFile(0)" class="btn btn-danger  bl bl" *ngIf="bigII['podImage'][0]['setter']==0"><i style="color:black;" class="material-icons">file_upload</i></button>
+                          <button (click)="showFile(0)" data-toggle="modal" data-target="#myModalImageViewer" class="btn btn-success" *ngIf="bigII['podImage'][0]['setter']==1"><i style="color:black;" class="material-icons">remove_red_eye</i></button>
+                    </td>
+                      </tr>
+                      <tr>
+                        <td>LR Stamp Photo Front</td>
+                        <td>
+                            
+                            <button class="btn btn-danger  bcg" (click)="image('c',2)"  [hidden]="bigII['podImage'][1]['setter']==0"><i style="color:black;" class="material-icons">camera_alt</i></button>
+                            <input type="file" id="file2c" style="display:none" (change)="onFileSelected($event)"  capture="camera" accept="image/*" *ngIf="bigII['podImage'][1]['setter']==0">
+                            <button class="btn btn-danger  bcg" (click)="image('g',2)"  [hidden]="bigII['podImage'][1]['setter']==0"><i style="color:black;" class="material-icons">photo</i></button>
+                            <input type="file" id="file2g" style="display:none" (change)="onFileSelected($event)" accept=".jpg .jpeg .png" *ngIf="bigII['podImage'][1]['setter']==0">
+
+                          <span *ngIf="bigII['podImage'][1]['setter']==1">Image Uploaded</span>
+                          <button (click)="uploadFile(1)" class="btn btn-danger  bl" *ngIf="bigII['podImage'][1]['setter']==0"><i style="color:black;" class="material-icons">file_upload</i></button>
+                          <button (click)="showFile(1)" data-toggle="modal" data-target="#myModalImageViewer" class="btn btn-success" *ngIf="bigII['podImage'][1]['setter']==1"><i style="color:black;" class="material-icons">remove_red_eye</i></button>
+                        </td>
+                      </tr>
+                      
+                      <tr>
+                        <td>LR Stamp Photo Back</td>
+                        <td>
+                            <button class="btn btn-danger  bcg" (click)="image('c',3)"  [hidden]="bigII['podImage'][2]['setter']==0"><i style="color:black;" class="material-icons">camera_alt</i></button>
+                            <input type="file" id="file3c" style="display:none" (change)="onFileSelected($event)"  capture="camera" accept="image/*" *ngIf="bigII['podImage'][2]['setter']==0">
+                            <button class="btn btn-danger  bcg" (click)="image('g',3)"  [hidden]="bigII['podImage'][2]['setter']==0"><i style="color:black;" class="material-icons">photo</i></button>
+                            <input type="file" id="file3g" style="display:none" (change)="onFileSelected($event)" accept=".jpg .jpeg .png" *ngIf="bigII['podImage'][2]['setter']==0">
+
+                          <span *ngIf="bigII['podImage'][2]['setter']==1">Image Uploaded</span>
+                          <button (click)="uploadFile(2)" class="btn btn-danger  bl" *ngIf="bigII['podImage'][2]['setter']==0"><i style="color:black;" class="material-icons">file_upload</i></button>
+                          <button (click)="showFile(2)" data-toggle="modal" data-target="#myModalImageViewer" class="btn btn-success" *ngIf="bigII['podImage'][2]['setter']==1"><i style="color:black;" class="material-icons">remove_red_eye</i></button>
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td>Courier Photo D2B</td>
+                        <td>
+                            <button class="btn btn-danger  bcg" (click)="image('c',4)"  [hidden]="bigII['podImage'][3]['setter']==0"><i style="color:black;" class="material-icons">camera_alt</i></button>
+                            <input type="file" id="file4c" style="display:none" (change)="onFileSelected($event)"  capture="camera" accept="image/*" *ngIf="bigII['podImage'][3]['setter']==0">
+                            <button class="btn btn-danger  bcg" (click)="image('g',4)"  [hidden]="bigII['podImage'][3]['setter']==0"><i style="color:black;" class="material-icons">photo</i></button>
+                            <input type="file" id="file4g" style="display:none" (change)="onFileSelected($event)" accept=".jpg .jpeg .png" *ngIf="bigII['podImage'][3]['setter']==0">
+
+                          <span *ngIf="bigII['podImage'][3]['setter']==1">Image Uploaded</span>
+                          <button (click)="uploadFile(3)" class="btn btn-danger  bl" *ngIf="bigII['podImage'][3]['setter']==0"><i style="color:black;" class="material-icons">file_upload</i></button>
+                          <button (click)="showFile(3)" data-toggle="modal" data-target="#myModalImageViewer" class="btn btn-success" *ngIf="bigII['podImage'][3]['setter']==1"><i style="color:black;" class="material-icons">remove_red_eye</i></button>
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td>Courier Photo B2T</td>
+                        <td>
+                            <button class="btn btn-danger  bcg" (click)="image('c',5)"  [hidden]="bigII['podImage'][4]['setter']==0"><i style="color:black;" class="material-icons">camera_alt</i></button>
+                            <input type="file" id="file5c" style="display:none" (change)="onFileSelected($event)"  capture="camera" accept="image/*" *ngIf="bigII['podImage'][4]['setter']==0">
+                            <button class="btn btn-danger  bcg" (click)="image('g',5)"  [hidden]="bigII['podImage'][4]['setter']==0"><i style="color:black;" class="material-icons">photo</i></button>
+                            <input type="file" id="file5g" style="display:none" (change)="onFileSelected($event)" accept=".jpg .jpeg .png" *ngIf="bigII['podImage'][4]['setter']==0">
+
+                          <span *ngIf="bigII['podImage'][4]['setter']==1">Image Uploaded</span>
+                          <button (click)="uploadFile(4)" class="btn btn-danger  bl" *ngIf="bigII['podImage'][4]['setter']==0"><i style="color:black;" class="material-icons">file_upload</i></button>
+                          <button (click)="showFile(4)" data-toggle="modal" data-target="#myModalImageViewer" class="btn btn-success" *ngIf="bigII['podImage'][4]['setter']==1"><i style="color:black;" class="material-icons">remove_red_eye</i></button>
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td>Signed Bill Photo</td>
+                        <td>
+                            <button class="btn btn-danger  bcg" (click)="image('c',6)"  [hidden]="bigII['podImage'][5]['setter']==0"><i style="color:black;" class="material-icons">camera_alt</i></button>
+                            <input type="file" id="file6c" style="display:none" (change)="onFileSelected($event)"  capture="camera" accept="image/*" *ngIf="bigII['podImage'][5]['setter']==0">
+                            <button class="btn btn-danger  bcg" (click)="image('g',6)"  [hidden]="bigII['podImage'][5]['setter']==0"><i style="color:black;" class="material-icons">photo</i></button>
+                            <input type="file" id="file6g" style="display:none" (change)="onFileSelected($event)" accept=".jpg .jpeg .png" *ngIf="bigII['podImage'][5]['setter']==0">
+
+                          <span *ngIf="bigII['podImage'][5]['setter']==1">Image Uploaded</span>
+                          <button (click)="uploadFile(5)" class="btn btn-danger  bl" *ngIf="bigII['podImage'][5]['setter']==0"><i style="color:black;" class="material-icons">file_upload</i></button>
+                          <button (click)="showFile(5)" data-toggle="modal" data-target="#myModalImageViewer" class="btn btn-success" *ngIf="bigII['podImage'][5]['setter']==1"><i style="color:black;" class="material-icons">remove_red_eye</i></button>
+                        </td>
+                      </tr>
+                    </table>
+
+                  </div>
+            
+                  <div class="modal-footer">
+                    <button style="color:black;" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+                
+              </div>
+            </div>
+
+
+
+                <div class="modal fade" id="myModalImageViewer" role="dialog">
+              <div class="modal-dialog">
+              
+            
+                <div class="modal-content" style="background-color: black;color: wheat;">
+                  <div class="modal-header">
+                    <button style="color:black;" type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Image</h4>
+                  </div>
+                  <div class="modal-body" style="width: 1vh;padding: 0px;">
+
+                  <img src={{imgSrc}} width="500" height="500"/>
+
+                  </div>
+            
+                  <div class="modal-footer">
+                    <button style="color:black;" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+                
+              </div>
+            </div>
