@@ -5,6 +5,7 @@ import { NavigationComponent } from './pages/Navigation/navigation/navigation.co
 import { TruckDataComponent } from './pages/Navigation/TruckData/truck-data/truck-data.component';
 import { PODPhotoComponent } from './pages/PODPHOTO/podphoto/podphoto.component';
 import { BilladdComponent } from './pages/billImage/billadd/billadd.component';
+import { ContactHComponent } from './pages/Contact/contact-h/contact-h.component';
 
 export const routes: Routes =
     [
@@ -33,6 +34,10 @@ export const routes: Routes =
                 {
                     path:'BILLPHOTO',
                     component:BilladdComponent
+                },
+                {
+                    path:'Contact',
+                    component:ContactHComponent
                 }
             ]
         }

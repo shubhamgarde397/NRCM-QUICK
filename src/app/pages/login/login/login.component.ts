@@ -4,6 +4,7 @@ import { FormBuilder } from '@angular/forms';
 import { FormGroup } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+
 import { ApiCallsService } from '../../../common/services/ApiCalls/ApiCalls.service';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { SecurityCheckService } from '../../../common/services/Data/security-check.service';
@@ -33,6 +34,9 @@ export class LoginComponent implements OnInit {
   public header='';
   public isLoginSuccesss = false;
   public arr=[];
+  public areatext='';
+  public myFormGroup1: FormGroup;
+
   constructor(
     public router: Router,
     public apiCallservice: ApiCallsService,
@@ -40,7 +44,7 @@ export class LoginComponent implements OnInit {
     public spinnerService: Ng4LoadingSpinnerService,
     public security: SecurityCheckService,
     public obs:PassDataService,
-    public handledata:HandleDataService
+    public handledata:HandleDataService,
   ) {
     // if(!this.security.login){
     //   this.router.navigate([''])
@@ -52,6 +56,11 @@ export class LoginComponent implements OnInit {
       username: ['', Validators.required],
       password: ['', Validators.required],
     });
+  }
+
+    store1() {
+      
+    this.areatext='Today\n30-08-2025 order\n\n🇮🇳 Nitin Roadways 🇮🇳\n\nPune to Chennai\n\n8Ton\n\n8529275757\n9822288257';
   }
   setUser() {
     this.userTypeTS = this.userTypeHTML;

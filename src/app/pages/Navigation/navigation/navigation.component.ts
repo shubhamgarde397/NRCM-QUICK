@@ -98,6 +98,12 @@ export class NavigationComponent implements OnInit {
       this.router.navigate(['Navigation/'+data])
   }
 
+   routeR1(data){
+
+      this.router.navigate(['Navigation/'+data])
+  
+  }
+
 
 
  }
