@@ -35,8 +35,8 @@
                       <td>{{i.loadingDate|date:'dd-MM-yyyy'}}<br>{{i.truckName}}</td>
                       <td (click)="setLRNO(i,j,i.nrlrno)">{{i.partyName}}<br>{{i.placeName}}<br>{{i.nrlrno}}</td>
                       <td *ngIf="amountV">{{i.hamt}}<br>{{i.rent}}<br>{{i.suspenseAmt}}</td>
-                      <td *ngIf="i.nrlrno!=''" data-toggle="modal" data-target="#myModalImage" (click)="savePayment(i,j)">
-                        <button class="btn btn-warning"><i style="color:black;" class="material-icons">remove_red_eye</i></button><br>
+                      <td *ngIf="i.nrlrno!=''">
+                        <button class="btn btn-warning"><i style="color:black;" class="material-icons" data-toggle="modal" data-target="#myModalImage" (click)="savePayment(i,j)">remove_red_eye</i></button><br>
                         <div class="row">
                           <div class="col-xs-1" [ngClass]="i['podImage'][0]['setter']==0 ? 'redC':'greenC'" id="a1"></div>
                           <div class="col-xs-1" [ngClass]="i['podImage'][1]['setter']==0 ? 'redC':'greenC'" id="a1"></div>

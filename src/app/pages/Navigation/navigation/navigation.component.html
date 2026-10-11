@@ -7,10 +7,11 @@
 
     </div>
     <div class="navbar-header">
-      <a class="navbar-brand" (click)="routeR('TRUCK')">Truck</a>
-<a class="navbar-brand" (click)="routeR('PODPHOTO')">Truck POD</a>
-<a class="navbar-brand" (click)="routeR('BILLPHOTO')">BillNo Receipt</a>
-<a class="navbar-brand" (click)="routeR1('Contact')">Contact</a>
+      <a class="navbar-brand" *ngIf="nrcmid==1||nrcmid==5" (click)="routeR('TRUCK')">Truck</a>
+      <a class="navbar-brand" *ngIf="nrcmid==1||nrcmid==3" (click)="routeR('PODPHOTO')">POD</a>
+      <a class="navbar-brand" *ngIf="nrcmid==1||nrcmid==3" (click)="routeR('BILLPHOTO')">Bill</a>
+      <a class="navbar-brand" *ngIf="nrcmid==1||nrcmid==14" (click)="routeR1('Contact')">Contact</a>
+      <a class="navbar-brand" *ngIf="nrcmid==1||nrcmid==3" (click)="routeR1('TruckEntry')">Truck Entry</a>
 
     </div>
     

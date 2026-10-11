@@ -58,10 +58,6 @@ export class LoginComponent implements OnInit {
     });
   }
 
-    store1() {
-      
-    this.areatext='Today\n30-08-2025 order\n\n🇮🇳 Nitin Roadways 🇮🇳\n\nPune to Chennai\n\n8Ton\n\n8529275757\n9822288257';
-  }
   setUser() {
     this.userTypeTS = this.userTypeHTML;
       this.loginButton = false;

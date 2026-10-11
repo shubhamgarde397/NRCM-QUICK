@@ -4,7 +4,10 @@ import { FormBuilder } from '@angular/forms';
 import { FormGroup } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { SecurityCheckService } from '../../../common/services/Data/security-check.service';
+import { handleFunction } from 'src/app/common/services/functions/handleFunctions';
 import { Router } from 'node_modules/@angular/router';  
+import * as  jsPDF from 'jspdf';
+import 'jspdf-autotable';
 @Component({
   selector: 'app-contact-h',
   templateUrl: './contact-h.component.html',
@@ -22,7 +25,7 @@ export class ContactHComponent implements OnInit {
   public advbalarray=[];
  
   constructor(public router:Router,public apiCallservice: ApiCallsService, public formBuilder: FormBuilder,
-    public securityCheck: SecurityCheckService) { if(!this.securityCheck.login){
+    public securityCheck: SecurityCheckService,public hF:handleFunction) { if(!this.securityCheck.login){
       this.router.navigate([''])
     }}
 
@@ -102,6 +105,71 @@ export class ContactHComponent implements OnInit {
     
       
 }
+  download(){
+    let a=prompt('Enter Date in YYYY-MM-DD format');
+    if(a){
+      let pwd=prompt('Enter Password');
+      if(pwd==='LEO'){
+        let tempObj={}
 
+        tempObj['method']='downloadContact'; 
+        tempObj['date']=a;
+        this.apiCallservice.handleData_New_python('commoninformation', 1, tempObj, true)
+        .subscribe((res: any) => {
+          this.downloadFile(res.Data,a);
+        });
+      }
+    }
+  }
+
+  downloadFile(data, date){
+
+    let dataC=[]
+for(let i = 0;i<data.length;i++){
+    let temp=[]
+    temp.push(String(i+1))
+    temp.push(data[i]['tno'])
+    temp.push(data[i]['place'])
+    temp.push(data[i]['contact'])
+    dataC.push(temp)
 }
+
+
+    var doc = new jsPDF({
+        orientation: 'p',
+        unit: 'mm',
+        format: 'a6',
+        putOnlyUsedFonts:true
+       })
+     doc.setFontSize('25');
+     doc.setFontType('bold');
+     doc.setTextColor(215, 6, 9);
+     doc.text('NITIN ROADWAYS', 15, 12)//partyname
+     doc.setTextColor(0,0,0);
+     doc.setFontSize('10');
+    //headers
+     doc.text('Loading Date: ' + String(this.hF.getDateddmmyy(date)), 15, 18)//pageno
+     doc.setLineWidth(0.5);
+     doc.line(0, 20, 210, 20);//line after main header
+     doc.text('List of Vehicle loaded from Pune to Tamil Nadu', 15, 25)//pageno
+     //headers
+     doc.setFontSize('10');
+
+      doc.autoTable({
+      head: [['Sr','TruckNo','Place','Contact']],
+      body: dataC,
+      style:[],
+      theme: 'grid',
+      startY: 30,
+      margin: {  left: 6 },
+      headStyles :{lineWidth: 1,fillColor: [215, 6, 9],textColor: [255,255,255],
+      },
+      tableWidth: 'wrap'
+  });
+
+
+     doc.save(String(this.hF.getDateddmmyy(date))+'.pdf')
+   }
+}
+
 

@@ -83,6 +83,7 @@ this.trucknoid11=''
 }
 
   savePayment(i,j){
+    console.log(i)
     this.bigII=i;
     this.bigJJ=j;
     (<HTMLInputElement>document.getElementById('file1c')).value='';

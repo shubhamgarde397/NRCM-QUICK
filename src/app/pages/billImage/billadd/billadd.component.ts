@@ -90,7 +90,6 @@ public turn11=[];
         console.error(error);
       });
   }
-
    sendToServer(base64String: string,position) {
     // Implement the logic to send the Base64 string to the server
     const str='pod/'+this.trucknoid11.replace(/ /g, "")+'/';

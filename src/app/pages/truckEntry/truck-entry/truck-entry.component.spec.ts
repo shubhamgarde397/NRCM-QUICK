@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ContactHComponent } from './contact-h.component';
+import { TruckEntryComponent } from './truck-entry.component';
 
-describe('ContactHComponent', () => {
-  let component: ContactHComponent;
-  let fixture: ComponentFixture<ContactHComponent>;
+describe('TruckEntryComponent', () => {
+  let component: TruckEntryComponent;
+  let fixture: ComponentFixture<TruckEntryComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ContactHComponent ]
+      declarations: [ TruckEntryComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ContactHComponent);
+    fixture = TestBed.createComponent(TruckEntryComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
